@@ -107,9 +107,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STARIC_ROOT=os.path.join(BASE_DIR,'static')
+# STARIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
-STATICFILES_FIRS=[os.path.join(BASE_DIR,'staticfiles')] #serves when we run python manage.py collectstatic
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')] #serves when we run python manage.py collectstatic
 
 
 MEDIA_URL='/media/'
