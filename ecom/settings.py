@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 
     #Custom Apps
     'core',
+    'userauth',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +117,5 @@ MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media') #user uploaded files-- media folder created automatically
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL='userauth.User'
