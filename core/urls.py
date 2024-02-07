@@ -4,5 +4,5 @@ from . import views
 #namespacing urls
 app_name='core'
 urlpatterns = [
-    path('',views.index,name='home')
+    path('',views.index,name='index')
 ]
