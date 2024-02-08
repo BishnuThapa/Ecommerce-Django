@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # Create your views here.
@@ -41,16 +42,17 @@ def login_view(request):
         password = request.POST.get('password')
         try:
             user = User.objects.get(email=email)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'You are logged in.')
+                return redirect('core:index')
+            else:
+                messages.warning(
+                    request, f'User Does not exist. Create an account.')
         except:
             messages.warning(request, f'User with {email} doesn\'t exists.')
         user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'You are logged in.')
-            return redirect('core:index')
-        else:
-            messages.warning(
-                request, f'User Does not exist. Create an account.')
+
     return render(request, 'userauth/sign-in.html')
 
 
