@@ -31,7 +31,7 @@ def user_directory_path(instance, filename):
 
 
 class Category(models.Model):
-    cid = ShortUUIDField(unique=True, max_length=20,
+    cid = ShortUUIDField(unique=True, max_length=15,
                          prefix="cat", alphabet="abcdefgh12345")
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to='category')
@@ -88,15 +88,17 @@ class Product(models.Model):
         User, on_delete=models.SET_NULL, null=True, default="1")
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True)
+    vendor = models.ForeignKey(
+        Vendor, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to=user_directory_path)
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     old_price = models.DecimalField(max_digits=6, decimal_places=2)
     specification = models.TextField(null=True, blank=True)
-    tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
     product_status = models.CharField(
-        choices=STATUS_CHOICE, max_length=10, default="in_review")
+        choices=STATUS, max_length=10, default="in_review")
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
