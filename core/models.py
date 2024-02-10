@@ -87,7 +87,7 @@ class Product(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, default="1")
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.SET_NULL, null=True, related_name='category')
     vendor = models.ForeignKey(
         Vendor, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=255)
