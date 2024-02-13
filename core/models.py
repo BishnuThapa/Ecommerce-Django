@@ -57,6 +57,7 @@ class Vendor(models.Model):
                          prefix="ven", alphabet="abcdefgh12345")
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to=user_directory_path)
+    cover_image = models.ImageField(upload_to=user_directory_path)
     description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=255)
     contact = models.CharField(max_length=255, default="+977-0000000000")
@@ -65,6 +66,8 @@ class Vendor(models.Model):
     authentic_rating = models.CharField(max_length=255, default="100")
     days_return = models.CharField(max_length=255, default="100")
     warranty_period = models.CharField(max_length=255, default="100")
+    date = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True)
@@ -89,7 +92,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, related_name='category')
     vendor = models.ForeignKey(
-        Vendor, on_delete=models.SET_NULL, null=True)
+        Vendor, on_delete=models.SET_NULL, null=True, related_name='vendor')
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to=user_directory_path)
     description = models.TextField(null=True, blank=True)
@@ -120,7 +123,7 @@ class Product(models.Model):
         return self.title
 
     def get_percentage(self):
-        new_price = (self.price/self.old_price)*100
+        new_price = ((self.old_price-self.price)*100)/self.old_price
         return new_price
 
 
