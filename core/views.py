@@ -63,7 +63,11 @@ def vendor_detail_view(request, vid):
 
 def product_detail_view(request, pid):
     product = get_object_or_404(Product, pid=pid)
+
+    related_products = Product.objects.filter(
+        category=product.category).exclude(pid=pid)[:4]
     context = {
-        'product': product
+        'product': product,
+        'related_products': related_products
     }
     return render(request, 'core/product-detail.html', context)
