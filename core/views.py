@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Product, Category, Vendor, CartOrder, CartOrderItems, ProductImages, ProductReview, Wishlist, Address
 # Create your views here.
 
@@ -59,3 +59,11 @@ def vendor_detail_view(request, vid):
         'products': products
     }
     return render(request, 'core/vendor-detail.html', context)
+
+
+def product_detail_view(request, pid):
+    product = get_object_or_404(Product, pid=pid)
+    context = {
+        'product': product
+    }
+    return render(request, 'core/product-detail.html', context)
