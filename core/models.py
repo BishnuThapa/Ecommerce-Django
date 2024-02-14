@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauth.models import User
@@ -60,7 +61,7 @@ class Vendor(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to=user_directory_path)
     cover_image = models.ImageField(upload_to=user_directory_path)
-    description = models.TextField(null=True, blank=True)
+    description = RichTextUploadingField(null=True, blank=True)
     address = models.CharField(max_length=255)
     contact = models.CharField(max_length=255, default="+977-0000000000")
     chat_resp_time = models.CharField(max_length=255, default="100")
@@ -97,10 +98,10 @@ class Product(models.Model):
         Vendor, on_delete=models.SET_NULL, null=True, related_name='vendor')
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to=user_directory_path)
-    description = models.TextField(null=True, blank=True)
+    description = RichTextUploadingField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     old_price = models.DecimalField(max_digits=6, decimal_places=2)
-    specification = models.TextField(null=True, blank=True)
+    specification = RichTextUploadingField(null=True, blank=True)
     type = models.CharField(max_length=255, null=True, blank=True)
     stock_count = models.CharField(max_length=255, null=True, blank=True)
     life = models.CharField(max_length=255, null=True, blank=True)
