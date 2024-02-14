@@ -2,6 +2,7 @@ from django.db import models
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauth.models import User
+from taggit.managers import TaggableManager
 # Create your models here.
 
 
@@ -49,6 +50,7 @@ class Category(models.Model):
 
 
 class Tags(models.Model):
+    # tags = TaggableManager()
     pass
 
 
@@ -103,7 +105,8 @@ class Product(models.Model):
     stock_count = models.CharField(max_length=255, null=True, blank=True)
     life = models.CharField(max_length=255, null=True, blank=True)
     mfd = models.DateTimeField(auto_now_add=False, null=True, blank=True)
-    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+
+    tags = TaggableManager(blank=True)
     product_status = models.CharField(
         choices=STATUS, max_length=10, default="in_review")
     status = models.BooleanField(default=True)

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     #Custom Apps
     'core',
     'userauth',
+    'taggit',
 ]
 
 MIDDLEWARE = [

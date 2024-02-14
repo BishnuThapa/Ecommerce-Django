@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 django-shortuuidfield = "*"
 pillow = "*"
+django-taggit = "*"
 
 [dev-packages]
 
