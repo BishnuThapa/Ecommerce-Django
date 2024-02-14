@@ -2,6 +2,13 @@
 {% load static %}
 {% block content %}
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" integrity="sha512-hasIneQUHlh06VNBe7f6ZcHmeRTLIaQWFd43YriJ0UND19bvYRauxthDg8E4eVNPm9bRUhr5JGeqH7FRFXQu5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'assets/js/prism.js' %}"></script>
+<link rel="stylesheet" href="{% static 'assets/css/prism.css' %}">
+
 <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -124,7 +131,7 @@
                                         <div class="tab-content shop_info_tab entry-main-content">
                                             <div class="tab-pane fade show active" id="Description">
                                                 <div class="">
-                                                    <p>{{ product.description}}</p>
+                                                    <p>{{ product.description | safe }}</p>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="Additional-info">
