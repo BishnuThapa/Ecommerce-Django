@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Count, Avg
 from .models import Product, Category, Vendor, CartOrder, CartOrderItems, ProductImages, ProductReview, Wishlist, Address
 from taggit.models import Tag
 # Create your views here.
@@ -67,9 +68,19 @@ def product_detail_view(request, pid):
 
     related_products = Product.objects.filter(
         category=product.category).exclude(pid=pid)[:4]
+
+    # getting all reviews
+    reviews = ProductReview.objects.filter(product=product).order_by('-id')
+
+    # getting average review
+    average_rating = ProductReview.objects.filter(
+        product=product).aggregate(rating=Avg('rating'))
+
     context = {
         'product': product,
-        'related_products': related_products
+        'related_products': related_products,
+        'reviews': reviews,
+        'average_rating': average_rating
     }
     return render(request, 'core/product-detail.html', context)
 
